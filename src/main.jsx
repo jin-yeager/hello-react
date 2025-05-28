@@ -7,7 +7,7 @@ import Holl from "./Holl.jsx";
 import Lotto from "./Lotto.jsx";
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Lotto/>
-  </StrictMode>,
+/*  <StrictMode>*/
+    <App/>
+/*  </StrictMode>,*/
 )
