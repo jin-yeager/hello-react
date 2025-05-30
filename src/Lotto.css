@@ -1,3 +1,6 @@
-table, tr, td {
-    border: 1px solid grey;
-}
+    table,tr,td{
+        border: 1px solid grey ;
+    }
+    td{
+        width: 20px;
+    }

@@ -1,17 +1,21 @@
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react'
+
 
 function Life01() {
-    const msg = "LIFE01";
+    const [msg, setMsg] = useState("LIFE01")
 
     useEffect(() => {
-        console.log("LIFE01 Mounted");
-
+        console.log('LIFE01 mount');
         return () => {
-            console.log("LIFE01 Unmounted");
+            console.log('LIFE01 unmount');
         };
-    }, []); // 빈 배열: 마운트/언마운트에만 실행
+    }, []);
 
-    return <div>{msg}</div>;
+    return (
+        <>
+            {msg}
+        </>
+    )
 }
 
-export default Life01;
+export default Life01

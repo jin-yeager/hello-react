@@ -1,23 +1,22 @@
-import { useState } from 'react'
-import './App.css'
+import {useState} from 'react'
+
 
 function Morning() {
-  const [msg, setMsg] = useState("Good Morning")
+    const [msg, setMsg] = useState("Good Morning")
 
-  const myclick = () => {
-      setMsg("Good Evening")
-      console.log("shalalalalalala");
-  }
+    const myclick = () => {
+        setMsg("Good Evening")
+    }
 
-  return (
-    <>
-        {msg}
-        <button onClick={myclick}>
-            CLICK!
-        </button>
+    return (
+        <>
+            {msg}
+            <button onClick={myclick}>
+                CLICK
+            </button>
 
-    </>
-  )
+        </>
+    )
 }
 
 export default Morning

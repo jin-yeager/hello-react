@@ -1,12 +1,14 @@
-import React from 'react';
+import {useState} from 'react'
 
-export default function MyProp(props) {
-    return(
 
-      <>
-        속성:{props.alt}
-      </>
+function MyProp({alt,src}) {
 
+    return (
+        <>
+            속성:{alt}
+            <img src={src} />
+        </>
     )
 }
 
+export default MyProp

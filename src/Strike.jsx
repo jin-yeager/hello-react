@@ -1,71 +1,103 @@
-// App.jsx
-import React, { useState, useEffect,useRef } from 'react';
-import './Strike.css';
+import {useEffect, useRef, useState} from 'react'
+import "./Strike.css"
+
 
 function Strike() {
-    const comRef = useRef([]);
-    const [guess, setGuess] = useState('');
-    const [logs, setLogs] = useState([]);
-
-    useEffect(() => {
-        const arr = [];
-        while (arr.length < 3) {
-            const ran = Math.floor(Math.random() * 9) + 1;
-            if (!arr.includes(ran)) arr.push(ran);
-        }
-        comRef.current = arr;
-        console.log('정답:', comRef.current);
-    }, []);
+    let [mine, setMine] = useState("")
+    let [txt, setTxt] = useState("")
+    let com = useRef("123")
 
     const myclick = () => {
-        if (guess.length !== 3) return;
-        const inputArr = guess.split('').map(n => parseInt(n, 10));
-        let strike = 0, ball = 0;
+        let s = getS(com.current, mine)
+        let b = getB(com.current, mine);
 
-        for (let i = 0; i < com.length; i++) {
-            if (inputArr[i] === com[i]) strike++;
-            else if (com.includes(inputArr[i])) ball++;
+        let line = `${mine}\t${s}S${b}B<br/>`;
+        if (s == 3) {
+            setTimeout("alert(" + mine + "+''+'축하합니다.')")
         }
 
-        setLogs(prev => [...prev, `${guess} - ${strike}S ${ball}B`]);
-        setGuess('');
-        if (strike === 3) alert(`${guess} 축하합니다.`);
-    };
+        setTxt(txt + line)
+        setMine("")
+    }
+
+    useEffect(() => {
+        let arr9 = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9
+        ];
+
+        for (let i = 0; i < 1000; i++) {
+            let rnd = parseInt((Math.random() * 9).toString());
+            let temp = arr9[0];
+            arr9[0] = arr9[rnd];
+            arr9[rnd] = temp;
+        }
+        com.current = arr9[0] + "" + arr9[1] + "" + arr9[2];
+        console.log("com", com.current);
+    }, []);
+
+    const getS = (com, mine) => {
+        let ret = 0;
+
+        let c1 = com.substring(0, 1);
+        let c2 = com.substring(1, 2);
+        let c3 = com.substring(2, 3);
+        let m1 = mine.substring(0, 1);
+        let m2 = mine.substring(1, 2);
+        let m3 = mine.substring(2, 3);
+
+        if (c1 == m1) ret++;
+        if (c2 == m2) ret++;
+        if (c3 == m3) ret++;
+
+        return ret;
+    }
+    const getB = (com, mine) => {
+        let ret = 0;
+
+        let c1 = com.substring(0, 1);
+        let c2 = com.substring(1, 2);
+        let c3 = com.substring(2, 3);
+        let m1 = mine.substring(0, 1);
+        let m2 = mine.substring(1, 2);
+        let m3 = mine.substring(2, 3);
+
+        if (c1 == m2 || c1 == m3) ret++;
+        if (c2 == m1 || c2 == m3) ret++;
+        if (c3 == m1 || c3 == m2) ret++;
+
+        return ret;
+    }
+
 
     return (
-        <table border="1">
-            <tbody>
-            <tr>
-                <td>맞출 수</td>
-                <td>
-                    <input
-                        type="text"
-                        id="it"
-                        value={guess}
-                        onChange={e => setGuess(e.target.value)}
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td colSpan="2">
-                    <input type="button" value="맞춰보기" onClick={myclick} />
-                </td>
-            </tr>
-            <tr>
-                <td colSpan="2">
-                    <div id="mydiv">
-                        {logs.map((log, i) => (
-                            <span key={i}>
-                  {log}
-                                <br />
-                </span>
-                        ))}
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    );
+        <>
+            <table>
+                <tbody>
+                <tr>
+                    <td>맞출수</td>
+                    <td>
+                        <input type="text" value={mine} onChange={(e) => {
+                            setMine(e.target.value)
+                        }}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colSpan="2">
+                        <input type="button" onClick={myclick} value="맞춰보기"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colSpan="2">
+                        <div dangerouslySetInnerHTML={{ __html: txt }} />
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </>
+    )
 }
 
-export default Strike;
+export default Strike

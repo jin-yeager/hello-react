@@ -1,22 +1,26 @@
-import { useState } from 'react'
-import './App.css'
+import {useState} from 'react'
 
-function Morning() {
-  const [count, setCount] = useState(+ "100")
 
-  const myclick = () => {
-    setCount(count + 1);
-  }
+function Count() {
+    const [count, setCount] = useState("100")
 
-  return (
-    <>
-        {count}
-        <button onClick={myclick}>
-            Increase
-        </button>
+    const myclick = () => {
+        let c = parseInt(count)
+        c++
+        setCount(c.toString())
+    }
 
-    </>
-  )
+
+
+    return (
+        <>
+            {count}
+            <button onClick={myclick} >
+                INCREASE
+            </button>
+
+        </>
+    )
 }
 
-export default Morning
+export default Count

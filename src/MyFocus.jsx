@@ -1,17 +1,20 @@
-import React, { useRef } from 'react';
+import {useRef, useState} from 'react'
 
-export default function MyFocus() {
-    const inputFocus = useRef(null);
+
+function MyFocus() {
+    let myobj = useRef(null)
 
     const myclick = () => {
-        inputFocus.current?.focus();
-    };
+        myobj.current.focus()
+    }
 
     return (
         <>
-            <input ref={inputFocus} type="text" />
-            <button onClick={myclick}>FOCUS</button>
+            <input type="text"  ref={myobj} />
+            <button onClick={myclick}>focus</button>
+
         </>
-    );
+    )
 }
 
+export default MyFocus
