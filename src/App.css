@@ -1,0 +1,45 @@
+.App {
+    text-align: center;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    margin-right: 10px;
+    color: blue;
+    text-decoration: underline;
+}
+
+.emp-table,
+.emp-table tr,
+.emp-table td {
+    border: 1px solid darkolivegreen;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.emp-table {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.emp-table td {
+    padding: 8px;
+}
+
+.input-text {
+    width: 50px;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+input[type="button"] {
+    margin: 5px;
+    padding: 5px 10px;
+}
